@@ -217,9 +217,9 @@ public class Player {
         int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        //                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
         decorView.setSystemUiVisibility(uiOptions);
         dialog.setCancelable(true);
         dialog.setOnDismissListener(dismissListener);
@@ -350,7 +350,7 @@ public class Player {
     }
 
     public void setStream(Uri uri, JSONObject controller) {
-        if (null != uri && null != exoPlayer) {
+        if (null != uri) {
             DefaultBandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
             MediaSource mediaSource = getMediaSource(uri, bandwidthMeter);
             exoPlayer.prepare(mediaSource);
@@ -369,10 +369,8 @@ public class Player {
     }
 
     private void pause() {
-        if (null != exoPlayer) {
-            paused = true;
-            exoPlayer.setPlayWhenReady(false);
-        }
+        paused = true;
+        exoPlayer.setPlayWhenReady(false);
     }
 
     private void play() {
